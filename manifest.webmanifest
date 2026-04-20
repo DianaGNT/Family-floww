@@ -1,0 +1,10 @@
+{
+  "name": "Family Flow",
+  "short_name": "Family Flow",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f1ea",
+  "theme_color": "#0f766e",
+  "lang": "ru",
+  "icons": []
+}

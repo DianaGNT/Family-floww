@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Family Flow</title>
+  <meta name="theme-color" content="#0f766e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Family Flow" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f5f1ea;--surface:rgba(255,255,255,.76);--surface-strong:#fffdf9;--surface-soft:#f1ece5;--text:#241f1a;--muted:#7c756d;--line:rgba(36,31,26,.08);--teal:#0f766e;--teal-soft:#d7f2ef;--shadow:0 12px 30px rgba(67,49,31,.10)}
+    [data-theme="dark"]{--bg:#171513;--surface:rgba(32,29,27,.82);--surface-strong:#221f1d;--surface-soft:#2a2624;--text:#f1ebe4;--muted:#b6aea6;--line:rgba(255,255,255,.09);--teal-soft:rgba(15,118,110,.24);--shadow:0 18px 36px rgba(0,0,0,.28)}
+    *{box-sizing:border-box} body{margin:0;min-height:100vh;font-family:Inter,system-ui,sans-serif;background:radial-gradient(circle at top left, rgba(216,106,123,.10), transparent 28%),radial-gradient(circle at top right, rgba(15,118,110,.10), transparent 25%),var(--bg);color:var(--text)} button,input,select,textarea{font:inherit} button{cursor:pointer}
+    .app{max-width:1280px;margin:0 auto;padding:22px 18px 110px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid var(--line);background:var(--surface);backdrop-filter:blur(18px);border-radius:24px;box-shadow:var(--shadow);position:sticky;top:14px;z-index:5}.brand{display:flex;align-items:center;gap:12px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#0f766e,#d86a7b);display:grid;place-items:center;color:#fff;font-size:20px}.brand h1{margin:0;font-size:18px}.brand p{margin:2px 0 0;color:var(--muted);font-size:13px}.top-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.pill,.icon-btn,.btn{border:1px solid var(--line);background:var(--surface-strong);color:var(--text);border-radius:999px;min-height:44px;padding:0 14px;font-weight:600}.icon-btn{width:44px;display:grid;place-items:center;padding:0}
+    .hero{margin-top:18px;display:grid;grid-template-columns:1.2fr .8fr;gap:18px}.hero-main,.hero-side,.card{border:1px solid var(--line);background:var(--surface);backdrop-filter:blur(18px);border-radius:30px;box-shadow:var(--shadow)}.hero-main{padding:28px}.hero-side{padding:20px;display:grid;gap:14px}.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--teal-soft);color:var(--teal);font-weight:700;font-size:13px}.hero h2{margin:18px 0 12px;font:700 clamp(30px,5vw,52px) 'Playfair Display',serif;line-height:1.02;max-width:11ch}.hero p{color:var(--muted);font-size:16px;max-width:60ch}.hero-tags,.chips,.action-row,.row-wrap,.legend{display:flex;flex-wrap:wrap;gap:10px}.tag,.chip,.mode-chip{padding:10px 14px;border-radius:999px;background:var(--surface-strong);border:1px solid var(--line);font-size:14px;font-weight:600}.mini-card{background:var(--surface-strong);border:1px solid var(--line);border-radius:22px;padding:16px}.mini-label{color:var(--muted);font-size:13px;margin-bottom:6px}.mini-value{font-size:28px;font-weight:800}
+    .layout{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;margin-top:18px}.card{padding:20px}.section-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.section-title h3{margin:0;font-size:22px}.section-title span{color:var(--muted);font-size:14px}.muted{color:var(--muted)}
+    .view{display:none}.view.active{display:block}.grid{display:grid;gap:12px}.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}
+    .task{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:flex-start;background:var(--surface-strong);border:1px solid var(--line);padding:14px;border-radius:20px}.task-icon,.tiny-icon,.category-icon{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-size:20px;background:var(--surface-soft)}.task h4{margin:0 0 4px;font-size:16px}.task p{margin:0;color:var(--muted);font-size:14px}
+    .accent-btn{background:linear-gradient(135deg,#0f766e,#138a81);color:#fff;border:none;min-height:48px;border-radius:16px;padding:0 16px;font-weight:800;box-shadow:0 12px 22px rgba(15,118,110,.22)}.soft-btn,.ghost-btn{background:var(--surface-strong);border:1px solid var(--line);min-height:48px;border-radius:16px;padding:0 16px;font-weight:700;color:var(--text)}.ghost-btn{background:transparent;border-style:dashed;color:var(--muted)}.small{min-height:38px;border-radius:12px;padding:0 12px;font-size:13px}
+    .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);background:var(--surface-strong);color:var(--text);border-radius:16px;padding:14px}.field textarea{min-height:90px;resize:vertical}
+    .toggle-pill,.icon-choice,.color-choice,.seg-btn{padding:10px 12px;border-radius:999px;background:var(--surface-strong);border:1px solid var(--line);font-size:13px;font-weight:700}.toggle-pill.active,.seg-btn.active,.icon-choice.active,.color-choice.active{background:var(--teal-soft);color:var(--teal);border-color:transparent}
+    .calendar-switch{display:flex;gap:8px;flex-wrap:wrap}.calendar-wrap,.category-grid,.member-grid,.list{display:grid;gap:12px}.calendar-week{grid-template-columns:repeat(7,minmax(78px,1fr))}.calendar-month{grid-template-columns:repeat(7,minmax(88px,1fr))}.calendar-year{grid-template-columns:repeat(4,1fr)}
+    .day,.month-mini{background:var(--surface-strong);border:1px solid var(--line);border-radius:20px;padding:12px;min-height:140px;display:grid;align-content:start;gap:8px}.month-mini{min-height:180px}.day strong,.month-mini strong{font-size:14px}.date{color:var(--muted);font-size:12px}.event{border-radius:14px;padding:8px 10px;font-size:12px;font-weight:700;line-height:1.25}.legend-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}.dot{width:12px;height:12px;border-radius:999px}
+    .doc-item,.check-item,.member-card,.category-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:18px;background:var(--surface-strong);border:1px solid var(--line)} .member-card,.category-card{display:grid;gap:8px}.member-grid{grid-template-columns:repeat(2,1fr)}.category-grid{grid-template-columns:repeat(2,1fr)}.member-head{display:flex;align-items:center;gap:10px}.member-avatar{width:44px;height:44px;border-radius:16px;display:grid;place-items:center;color:#fff;font-size:20px}
+    .icon-palette,.color-palette{display:flex;flex-wrap:wrap;gap:8px}.swatch{width:24px;height:24px;border-radius:999px;display:inline-block}
+    .mobile-nav{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;width:min(94%,560px);background:rgba(255,253,249,.88);border:1px solid rgba(36,31,26,.08);backdrop-filter:blur(18px);box-shadow:var(--shadow);border-radius:24px;padding:10px;display:none;grid-template-columns:repeat(5,1fr);gap:8px;z-index:9}[data-theme="dark"] .mobile-nav{background:rgba(34,31,29,.88);border-color:rgba(255,255,255,.08)}.nav-btn{min-height:56px;border:none;background:transparent;border-radius:18px;color:var(--text);display:grid;gap:4px;place-items:center;font-size:12px;font-weight:700}.nav-btn.active{background:var(--teal-soft);color:var(--teal)}
+    .toast{position:fixed;right:16px;top:90px;background:var(--surface-strong);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:18px;padding:14px 16px;font-weight:700;display:none;z-index:10}.hidden{display:none!important}.done{opacity:.65}.done h4,.done b{text-decoration:line-through}
+    @media (max-width:1080px){.hero,.layout,.grid.two,.grid.three{grid-template-columns:1fr}} @media (max-width:760px){.app{padding-inline:14px}.top-actions .pill{display:none}.mobile-nav{display:grid}.calendar-week,.calendar-month,.calendar-year,.member-grid,.category-grid{grid-template-columns:1fr 1fr}.hero-main,.hero-side,.card{border-radius:24px}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><div class="logo">✦</div><div><h1>Family Flow</h1><p>Для личных и общих дел всей семьи</p></div></div>
+      <div class="top-actions"><div class="pill">🔒 Личные дела + 👨‍👩‍👧‍👦 Общие семейные планы</div><button class="icon-btn" id="themeToggle" aria-label="Сменить тему">🌙</button></div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">💛 Спокойный порядок для всех и для каждого</div>
+        <h2>Личное — при себе. Семейное — на виду у всех.</h2>
+        <p>Теперь в одном приложении можно вести свои личные дела, скрытые от других членов семьи, и общие семейные дела, которые открыты для всех. Задачи удобно смотреть по неделе, месяцу и году, а категории можно настраивать под себя: менять цвет, иконку и смысл.</p>
+        <div class="hero-tags"><span class="tag">🔐 Личное и общее</span><span class="tag">🗓 Неделя, месяц, год</span><span class="tag">🎨 Свои цвета</span><span class="tag">✨ Свои иконки</span></div>
+      </div>
+      <aside class="hero-side">
+        <div class="mini-card"><div class="mini-label">Сейчас выбран пользователь</div><div class="mini-value" id="currentUserLabel">Анна</div><div class="row-wrap" id="userSwitch"></div></div>
+        <div class="mini-card"><div class="mini-label">Что видно</div><div class="row-wrap"><span class="mode-chip" id="privacyHint">Личные + семейные дела</span></div></div>
+      </aside>
+    </section>
+
+    <section class="layout">
+      <div class="grid">
+        <section class="card view active" id="view-today">
+          <div class="section-title"><h3>Мои и семейные дела</h3><span>Каждый видит своё и то, что открыто для семьи</span></div>
+          <div class="list" id="taskList"></div>
+        </section>
+
+        <section class="card view" id="view-calendar">
+          <div class="section-title"><h3>Календарь</h3><span>Неделя, месяц и год в одном месте</span></div>
+          <div class="calendar-switch"><button class="seg-btn active" data-cal-view="week">Неделя</button><button class="seg-btn" data-cal-view="month">Месяц</button><button class="seg-btn" data-cal-view="year">Год</button></div>
+          <div class="legend" id="legend"></div>
+          <div class="calendar-wrap calendar-week" id="calendarGrid"></div>
+        </section>
+
+        <section class="card view" id="view-task">
+          <div class="section-title"><h3>Карточка задачи</h3><span>Чек-листы, документы и видимость</span></div>
+          <div class="task" style="grid-template-columns:auto 1fr;">
+            <div class="task-icon" id="focusTaskIcon">📎</div>
+            <div><h4 id="focusTaskTitle">Собрать документы для секции</h4><p id="focusTaskNote">Можно хранить описание, чек-лист, файлы и решать, кому это дело видно.</p><div class="chips" id="focusTaskMeta"></div></div>
+          </div>
+          <div class="grid two" style="margin-top:14px;">
+            <div>
+              <div class="section-title" style="margin-bottom:10px;"><h3 style="font-size:18px;">Чек-лист</h3><span id="checkCount">1 из 3 готово</span></div>
+              <div class="list" id="checkList"></div>
+              <div class="action-row" style="margin-top:10px;"><button class="soft-btn small" id="addChecklistItem">☑️ Добавить шаг</button></div>
+            </div>
+            <div>
+              <div class="section-title" style="margin-bottom:10px;"><h3 style="font-size:18px;">Файлы</h3><span>Под рукой</span></div>
+              <div class="list" id="attachmentList"></div>
+              <div class="action-row" style="margin-top:10px;"><button class="soft-btn small" id="addAttachment">📎 Добавить файл</button></div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="grid">
+        <section class="card view active" id="view-new">
+          <div class="section-title"><h3>Новое дело</h3><span>Создай личное или общее</span></div>
+          <div class="grid">
+            <div class="field"><label>Название</label><input id="taskName" value="Подготовить документы для кружка"></div>
+            <div class="field"><label>Описание</label><textarea id="taskNote">Собрать фото, справку и квитанцию. Вечером проверить рюкзак.</textarea></div>
+            <div class="grid two">
+              <div class="field"><label>Для кого</label><select id="taskMember"></select></div>
+              <div class="field"><label>Категория</label><select id="taskCategory"></select></div>
+            </div>
+            <div class="grid two">
+              <div class="field"><label>Дата</label><input id="taskDate" type="date" value="2026-04-22"></div>
+              <div class="field"><label>Время</label><input id="taskTime" type="time" value="18:30"></div>
+            </div>
+            <div>
+              <label class="muted" style="display:block;margin-bottom:6px;font-size:13px;">Кому видно</label>
+              <div class="row-wrap" id="privacySwitch">
+                <button class="toggle-pill active" data-privacy="private">🔒 Только мне</button>
+                <button class="toggle-pill" data-privacy="family">👨‍👩‍👧‍👦 Всей семье</button>
+              </div>
+            </div>
+            <div><label class="muted" style="display:block;margin-bottom:6px;font-size:13px;">Повтор</label><div class="row-wrap" id="repeatRow"><button class="toggle-pill active" type="button">Пн</button><button class="toggle-pill" type="button">Вт</button><button class="toggle-pill active" type="button">Ср</button><button class="toggle-pill" type="button">Чт</button><button class="toggle-pill" type="button">Пт</button><button class="toggle-pill" type="button">Сб</button><button class="toggle-pill" type="button">Вс</button></div></div>
+            <div class="grid two"><button class="accent-btn" id="createTask">✨ Сохранить дело</button><button class="ghost-btn" id="showTaskCard">📎 Открыть карточку задачи</button></div>
+          </div>
+        </section>
+
+        <section class="card view active" id="view-categories">
+          <div class="section-title"><h3>Категории</h3><span>Свои цвета и иконки</span></div>
+          <div class="grid">
+            <div class="grid two">
+              <div class="field"><label>Название категории</label><input id="categoryName" value="Питомцы"></div>
+              <div class="field"><label>Цвет</label><div class="color-palette" id="colorPalette"></div></div>
+            </div>
+            <div class="field"><label>Иконка</label><div class="icon-palette" id="iconPalette"></div></div>
+            <button class="accent-btn" id="addCategory">🎨 Добавить категорию</button>
+            <div class="category-grid" id="categoryGrid"></div>
+          </div>
+        </section>
+
+        <section class="card view active" id="view-family">
+          <div class="section-title"><h3>Семья</h3><span>У каждого своё пространство</span></div>
+          <div class="member-grid" id="memberGrid"></div>
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Навигация">
+    <button class="nav-btn active" data-open-view="today">🏠<span>Дела</span></button>
+    <button class="nav-btn" data-open-view="calendar">🗓<span>Календарь</span></button>
+    <button class="nav-btn" data-open-view="new">➕<span>Новое</span></button>
+    <button class="nav-btn" data-open-view="categories">🎨<span>Категории</span></button>
+    <button class="nav-btn" data-open-view="family">👨‍👩‍👧‍👦<span>Семья</span></button>
+  </nav>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    let dark = matchMedia('(prefers-color-scheme: dark)').matches;
+    root.setAttribute('data-theme', dark ? 'dark' : 'light');
+    themeToggle.textContent = dark ? '☀️' : '🌙';
+    themeToggle.onclick = () => { dark = !dark; root.setAttribute('data-theme', dark ? 'dark':'light'); themeToggle.textContent = dark ? '☀️':'🌙'; showToast(dark ? 'Тёмная тема включена' : 'Светлая тема включена'); };
+
+    const users = [
+      { id:'anna', name:'Анна', icon:'👩', color:'#d86a7b', role:'Дом и покупки' },
+      { id:'ilya', name:'Илья', icon:'👨', color:'#5f84d6', role:'Работа и здоровье' },
+      { id:'masha', name:'Маша', icon:'👧', color:'#8b70d6', role:'Кружки и школа' },
+      { id:'leva', name:'Лёва', icon:'👦', color:'#0f766e', role:'Садик и прогулки' }
+    ];
+
+    let categories = [
+      { id:'home', name:'Дом', icon:'🏡', color:'#d89a2b', soft:'#fff0ce' },
+      { id:'kids', name:'Дети', icon:'🧒', color:'#d86a7b', soft:'#fde8ec' },
+      { id:'health', name:'Здоровье', icon:'💚', color:'#4c8b4b', soft:'#e4f3df' },
+      { id:'work', name:'Работа', icon:'💼', color:'#5f84d6', soft:'#e9efff' },
+      { id:'study', name:'Учёба', icon:'📚', color:'#8b70d6', soft:'#efeafe' },
+      { id:'shop', name:'Покупки', icon:'🛒', color:'#0f766e', soft:'#d7f2ef' }
+    ];
+
+    let tasks = [
+      { id:1, title:'Разобрать стирку и сложить детскую форму', note:'Удобно сделать до 18:00, чтобы утром всё было готово без спешки.', member:'anna', category:'home', privacy:'family', date:'2026-04-20', time:'17:30', done:false, checklist:[{title:'Отсортировать одежду',done:true},{title:'Сложить форму',done:false},{title:'Подготовить носки',done:false}], attachments:['forma-list.pdf'] },
+      { id:2, title:'Проверить рюкзак Маши перед кружком', note:'Кроссовки, бутылка воды, сменная футболка и анкета.', member:'masha', category:'kids', privacy:'private', date:'2026-04-20', time:'19:00', done:false, checklist:[{title:'Положить бутылку воды',done:true},{title:'Проверить анкету',done:false}], attachments:['photo-masha.jpg'] },
+      { id:3, title:'Записать папу на приём и сохранить направление', note:'Номер клиники уже найден — осталось выбрать время и прикрепить файл.', member:'ilya', category:'health', privacy:'family', date:'2026-04-22', time:'10:30', done:false, checklist:[{title:'Позвонить в клинику',done:false},{title:'Прикрепить направление',done:false}], attachments:['napravlenie.pdf'] },
+      { id:4, title:'Купить продукты на выходные', note:'Овощи, фрукты, йогурт и паста.', member:'anna', category:'shop', privacy:'family', date:'2026-04-25', time:'12:00', done:false, checklist:[{title:'Составить список',done:true}], attachments:[] },
+      { id:5, title:'Подготовиться к уроку английского', note:'Повторить слова и взять тетрадь.', member:'masha', category:'study', privacy:'private', date:'2026-05-03', time:'16:00', done:false, checklist:[{title:'Повторить 10 слов',done:false}], attachments:[] }
+    ];
+
+    const iconOptions = ['🏡','🧒','💚','💼','📚','🛒','🐶','🐱','🚗','🧾','🎵','🎨','⚽','🩰','🍽️','🌿','🏥','📎','🧸','🎁','✈️','🏫','💡','🧹'];
+    const colorOptions = ['#d89a2b','#d86a7b','#4c8b4b','#5f84d6','#8b70d6','#0f766e','#c96f2d','#db5f9a','#7d8b2f','#5f9ea0','#b35fd6','#7a6d64'];
+    let selectedUser = 'anna';
+    let selectedPrivacy = 'private';
+    let selectedIcon = '🐶';
+    let selectedColor = '#0f766e';
+    let currentCalendarView = 'week';
+    let focusTaskId = 3;
+
+    function showToast(text){const t=document.getElementById('toast');t.textContent=text;t.style.display='block';clearTimeout(window.tt);window.tt=setTimeout(()=>t.style.display='none',2200)}
+    function catById(id){return categories.find(c=>c.id===id)}
+    function userById(id){return users.find(u=>u.id===id)}
+    function visibleTasks(){return tasks.filter(t=>t.privacy==='family' || t.member===selectedUser)}
+
+    function renderUserSwitch(){
+      const wrap=document.getElementById('userSwitch'); wrap.innerHTML='';
+      users.forEach(u=>{const b=document.createElement('button');b.className='toggle-pill'+(u.id===selectedUser?' active':'');b.textContent=u.icon+' '+u.name;b.onclick=()=>{selectedUser=u.id; renderAll(); showToast('Выбран профиль: '+u.name)};wrap.appendChild(b)});
+      document.getElementById('currentUserLabel').textContent=userById(selectedUser).name;
+      document.getElementById('privacyHint').textContent='Личные + семейные дела';
+    }
+
+    function renderTaskList(){
+      const list=document.getElementById('taskList'); list.innerHTML='';
+      visibleTasks().sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).forEach(t=>{
+        const cat=catById(t.category), usr=userById(t.member);
+        const card=document.createElement('article'); card.className='task'+(t.done?' done':'');
+        card.innerHTML=`<div class="task-icon" style="background:${cat.soft};">${cat.icon}</div>
+        <div><h4>${t.title}</h4><p>${t.note}</p><div class="chips"><span class="chip" style="background:${cat.soft};color:${cat.color}">${cat.name}</span><span class="chip" style="background:var(--surface-soft)">${usr.icon} ${usr.name}</span><span class="chip" style="background:${t.privacy==='family'?'#d7f2ef':'#f1ece5'};color:${t.privacy==='family'?'#0f766e':'#6f655d'}">${t.privacy==='family'?'👨‍👩‍👧‍👦 Общее':'🔒 Личное'}</span><span class="chip" style="background:var(--surface-soft)">🕒 ${t.time}</span></div></div>
+        <div class="action-row"><button class="soft-btn small" data-open-task="${t.id}">Открыть</button><button class="soft-btn small" data-done="${t.id}">${t.done?'Вернуть':'Готово'}</button><button class="soft-btn small" data-delete="${t.id}">Удалить</button></div>`;
+        list.appendChild(card);
+      });
+      list.querySelectorAll('[data-open-task]').forEach(b=>b.onclick=()=>{focusTaskId=+b.dataset.openTask; openView('task'); renderFocusTask();});
+      list.querySelectorAll('[data-done]').forEach(b=>b.onclick=()=>{const t=tasks.find(x=>x.id==b.dataset.done); t.done=!t.done; renderTaskList(); showToast(t.done?'Дело отмечено как выполненное':'Дело снова активно')});
+      list.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>{if(confirm('Удалить это дело?')){tasks=tasks.filter(x=>x.id!=b.dataset.delete); renderAll(); showToast('Дело удалено')}});
+    }
+
+    function renderFocusTask(){
+      const t=tasks.find(x=>x.id===focusTaskId) || visibleTasks()[0]; if(!t) return;
+      focusTaskId=t.id; const cat=catById(t.category), usr=userById(t.member);
+      document.getElementById('focusTaskIcon').textContent=cat.icon; document.getElementById('focusTaskIcon').style.background=cat.soft;
+      document.getElementById('focusTaskTitle').textContent=t.title; document.getElementById('focusTaskNote').textContent=t.note;
+      document.getElementById('focusTaskMeta').innerHTML=`<span class="chip" style="background:${cat.soft};color:${cat.color}">${cat.name}</span><span class="chip" style="background:var(--surface-soft)">${usr.icon} ${usr.name}</span><span class="chip" style="background:${t.privacy==='family'?'#d7f2ef':'#f1ece5'};color:${t.privacy==='family'?'#0f766e':'#6f655d'}">${t.privacy==='family'?'👨‍👩‍👧‍👦 Открыто для семьи':'🔒 Только для владельца'}</span><span class="chip" style="background:var(--surface-soft)">🕒 ${t.date} ${t.time}</span>`;
+      const check=document.getElementById('checkList'); check.innerHTML='';
+      t.checklist.forEach((c,i)=>{const row=document.createElement('button');row.className='check-item'+(c.done?' done':'');row.innerHTML=`<div class="tiny-icon" style="background:${c.done?cat.soft:'var(--surface-soft)'}">${c.done?'✅':'⬜'}</div><div><b>${c.title}</b><span>${c.done?'Готово':'Нажми, чтобы отметить'}</span></div>`;row.onclick=()=>{c.done=!c.done; renderFocusTask();};check.appendChild(row)});
+      document.getElementById('checkCount').textContent=`${t.checklist.filter(x=>x.done).length} из ${t.checklist.length} готово`;
+      const att=document.getElementById('attachmentList'); att.innerHTML='';
+      t.attachments.forEach(name=>{const row=document.createElement('div');row.className='doc-item';row.innerHTML=`<div class="tiny-icon" style="background:${cat.soft};">📎</div><div><b>${name}</b><span>Прикреплено к задаче</span></div>`;att.appendChild(row)});
+    }
+
+    function eventCard(task){const cat=catById(task.category);return `<div class="event" style="background:${cat.soft};color:${cat.color}">${cat.icon} ${task.time} · ${task.title}</div>`}
+    function renderLegend(){const wrap=document.getElementById('legend');wrap.innerHTML='';categories.slice(0,6).forEach(c=>{const el=document.createElement('div');el.className='legend-item';el.innerHTML=`<span class="dot" style="background:${c.color}"></span>${c.icon} ${c.name}`;wrap.appendChild(el)})}
+    function renderCalendar(){
+      const grid=document.getElementById('calendarGrid'); grid.className='calendar-wrap calendar-'+currentCalendarView; grid.innerHTML='';
+      const visible=visibleTasks();
+      if(currentCalendarView==='week'){
+        const days=[['Пн','2026-04-20'],['Вт','2026-04-21'],['Ср','2026-04-22'],['Чт','2026-04-23'],['Пт','2026-04-24'],['Сб','2026-04-25'],['Вс','2026-04-26']];
+        days.forEach(([label,date])=>{const el=document.createElement('div');el.className='day';const items=visible.filter(t=>t.date===date).map(eventCard).join('');el.innerHTML=`<div><strong>${label}</strong><div class="date">${date.slice(8)}</div></div>${items || '<div class="muted">Свободно</div>'}`;grid.appendChild(el)});
+      } else if(currentCalendarView==='month'){
+        for(let d=1; d<=30; d++){
+          const date=`2026-04-${String(d).padStart(2,'0')}`; const el=document.createElement('div'); el.className='day';
+          const items=visible.filter(t=>t.date===date).slice(0,3).map(eventCard).join('');
+          el.innerHTML=`<div><strong>${d}</strong><div class="date">апрель</div></div>${items || '<div class="muted">—</div>'}`; grid.appendChild(el);
+        }
+      } else {
+        const months=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+        months.forEach((m,idx)=>{const num=String(idx+1).padStart(2,'0');const el=document.createElement('div');el.className='month-mini';const items=visible.filter(t=>t.date.slice(5,7)===num).slice(0,4).map(eventCard).join('');el.innerHTML=`<div><strong>${m}</strong><div class="date">2026</div></div>${items || '<div class="muted">Пока пусто</div>'}`;grid.appendChild(el)})
+      }
+      renderLegend();
+    }
+
+    function renderCategoryForm(){
+      const sel=document.getElementById('taskCategory'); sel.innerHTML=''; categories.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=`${c.icon} ${c.name}`;sel.appendChild(o)});
+      const memberSel=document.getElementById('taskMember'); memberSel.innerHTML=''; users.forEach(u=>{const o=document.createElement('option');o.value=u.id;o.textContent=`${u.icon} ${u.name}`; if(u.id===selectedUser) o.selected=true; memberSel.appendChild(o)});
+      const cg=document.getElementById('categoryGrid'); cg.innerHTML=''; categories.forEach(c=>{const card=document.createElement('div');card.className='category-card';card.innerHTML=`<div class="member-head"><div class="category-icon" style="background:${c.soft};">${c.icon}</div><div><b>${c.name}</b><div class="muted" style="font-size:13px;">Цвет и иконка можно менять</div></div></div><div class="chips"><span class="chip" style="background:${c.soft};color:${c.color}">${c.name}</span></div>`;cg.appendChild(card)});
+    }
+
+    function renderPalettes(){
+      const ip=document.getElementById('iconPalette'); ip.innerHTML=''; iconOptions.forEach(ic=>{const b=document.createElement('button');b.className='icon-choice'+(ic===selectedIcon?' active':'');b.textContent=ic;b.onclick=()=>{selectedIcon=ic; renderPalettes()};ip.appendChild(b)});
+      const cp=document.getElementById('colorPalette'); cp.innerHTML=''; colorOptions.forEach(cl=>{const b=document.createElement('button');b.className='color-choice'+(cl===selectedColor?' active':'');b.innerHTML=`<span class="swatch" style="background:${cl}"></span>`;b.onclick=()=>{selectedColor=cl; renderPalettes()};cp.appendChild(b)});
+    }
+
+    function renderMembers(){
+      const grid=document.getElementById('memberGrid'); grid.innerHTML=''; users.forEach(u=>{const count=tasks.filter(t=>t.member===u.id || t.privacy==='family').length;const card=document.createElement('div');card.className='member-card';card.innerHTML=`<div class="member-head"><div class="member-avatar" style="background:${u.color}">${u.icon}</div><div><b>${u.name}</b><div class="muted" style="font-size:13px;">${u.role}</div></div></div><div class="chips"><span class="chip" style="background:var(--surface-soft)">${count} видимых дел</span>${u.id===selectedUser?'<span class="chip" style="background:#d7f2ef;color:#0f766e">Текущий профиль</span>':''}</div>`;grid.appendChild(card)})
+    }
+
+    function renderPrivacySwitch(){document.querySelectorAll('#privacySwitch [data-privacy]').forEach(btn=>{btn.classList.toggle('active', btn.dataset.privacy===selectedPrivacy); btn.onclick=()=>{selectedPrivacy=btn.dataset.privacy; renderPrivacySwitch();};});}
+
+    function openView(name){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); if(['today','calendar','task'].includes(name)) document.getElementById('view-'+name).classList.add('active'); if(['new','categories','family'].includes(name)) document.getElementById('view-'+name).classList.add('active'); if(name==='today') document.getElementById('view-new').classList.add('active'); if(name==='calendar') document.getElementById('view-family').classList.add('active'); if(name==='task') document.getElementById('view-family').classList.add('active'); if(name==='new') document.getElementById('view-today').classList.add('active'); if(name==='categories') document.getElementById('view-today').classList.add('active'); if(name==='family') document.getElementById('view-today').classList.add('active'); document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.openView===name));}
+
+    document.querySelectorAll('[data-open-view]').forEach(b=>b.onclick=()=>openView(b.dataset.openView));
+    document.querySelectorAll('.nav-btn').forEach(b=>b.onclick=()=>openView(b.dataset.openView));
+    document.querySelectorAll('#repeatRow .toggle-pill').forEach(b=>b.onclick=()=>b.classList.toggle('active'));
+    document.querySelectorAll('[data-cal-view]').forEach(b=>b.onclick=()=>{currentCalendarView=b.dataset.calView;document.querySelectorAll('[data-cal-view]').forEach(x=>x.classList.toggle('active',x===b));renderCalendar()});
+
+    document.getElementById('createTask').onclick=()=>{
+      const title=document.getElementById('taskName').value.trim()||'Новое дело';
+      const note=document.getElementById('taskNote').value.trim()||'Без описания';
+      const member=document.getElementById('taskMember').value; const category=document.getElementById('taskCategory').value;
+      const date=document.getElementById('taskDate').value||'2026-04-22'; const time=document.getElementById('taskTime').value||'18:00';
+      const id=Date.now(); tasks.unshift({id,title,note,member,category,privacy:selectedPrivacy,date,time,done:false,checklist:[{title:'Первый шаг',done:false}],attachments:[]});
+      focusTaskId=id; renderAll(); openView('today'); showToast(selectedPrivacy==='family'?'Общее семейное дело добавлено':'Личное дело добавлено');
+    };
+
+    document.getElementById('showTaskCard').onclick=()=>{openView('task'); renderFocusTask();};
+    document.getElementById('addAttachment').onclick=()=>{const t=tasks.find(x=>x.id===focusTaskId); if(!t) return; const name=prompt('Название файла','document.pdf'); if(!name) return; t.attachments.unshift(name); renderFocusTask(); showToast('Файл добавлен');};
+    document.getElementById('addChecklistItem').onclick=()=>{const t=tasks.find(x=>x.id===focusTaskId); if(!t) return; const name=prompt('Новый шаг','Подписать заявление'); if(!name) return; t.checklist.push({title:name,done:false}); renderFocusTask(); showToast('Шаг добавлен');};
+    document.getElementById('addCategory').onclick=()=>{const name=document.getElementById('categoryName').value.trim(); if(!name) return; const id='c'+Date.now(); categories.push({id,name,icon:selectedIcon,color:selectedColor,soft:selectedColor+'22'}); renderAll(); showToast('Категория добавлена');};
+
+    function renderAll(){renderUserSwitch();renderTaskList();renderFocusTask();renderCategoryForm();renderPalettes();renderMembers();renderPrivacySwitch();renderCalendar();}
+    renderAll();
+
+    if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
+  </script>
+</body>
+</html>
